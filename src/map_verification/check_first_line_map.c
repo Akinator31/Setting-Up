@@ -16,7 +16,6 @@ int check_first_line_map(char *buffer)
         return 0;
     }
     for (int i = 0; i <= my_strlen(buffer) - 2; i++) {
-        printf("%c\n", buffer[i]);
         if (!is_a_number(buffer[i])) {
             return 0;
         }
