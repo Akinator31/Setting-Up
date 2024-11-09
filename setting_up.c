@@ -6,20 +6,27 @@
 */
 
 #include <unistd.h>
+#include <fcntl.h>
 #include "include/setting_up.h"
+
+int file_test(char *filepath)
+{
+    int fd = open(filepath, O_RDONLY);
+
+    if (fd == -1)
+        return 84;
+    return 0;
+}
 
 int main(int ac, char **av)
 {
     if (ac == 1) {
-        write(2, "No arguments given as parameter\n", 33);
-        return 84;
+        return no_arguments_error();
     }
     if (!first_arg_is_a_number(av[1])) {
-        if (map_verification(av[1]) == 0)
+        if (file_test(av[1]) == 84)
             return map_file_failed_opening();
-        if (map_verification(av[1]) == 1)
-            return map_file_empty();
-        if (map_verification(av[1]) == 2)
-            return map_file_first_line_error();
+        if (map_verification(av[1]) == 84)
+            return 84;
     }
 }

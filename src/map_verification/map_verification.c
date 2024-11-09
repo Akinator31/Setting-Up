@@ -5,32 +5,22 @@
 ** map_verification
 */
 
-#include <fcntl.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <sys/stat.h>
+#include <fcntl.h>
 #include "../../include/setting_up.h"
 
 int map_verification(char *filepath)
 {
-    int fd = open(filepath, O_RDONLY);
-    int read_result = 0;
-    struct stat info_file;
-    char *buffer = NULL;
+    int report_code = 0;
 
-    stat(filepath, &info_file);
-    buffer = malloc(sizeof(char) * info_file.st_size + 1);
-    buffer[info_file.st_size] = '\0';
-    if (fd == -1)
-        return 0;
-    if (info_file.st_size == 0)
-        return 1;
-    read_result = read(fd, buffer, info_file.st_size);
-    if (!check_first_line_map(buffer)) {
-        free(buffer);
-        return 2;
-    }
-    free(buffer);
-    close(fd);
-    return 10;
+    if (check_number_of_lines(filepath) == 1)
+        return map_file_empty();
+    if (check_number_of_lines(filepath) == 2)
+        return map_file_first_line_error();
+    if (check_correct_number_of_line_map(filepath) == 3)
+        return map_incorrect_line_number();
+    if (check_map_content(filepath) == 4)
+        return map_forbidden_char();
+    if (check_lines_length(filepath) == 5)
+        return map_incorrect_lines_length();
 }

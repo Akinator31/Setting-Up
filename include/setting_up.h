@@ -13,6 +13,15 @@ typedef struct square_size {
     int col;
 } square_size_t;
 
+typedef struct errors_s {
+    int err_code;
+    int (*f)(void);
+} errors_t;
+
+typedef struct error_report {
+    int err_code;
+} error_report_t;
+
 void free_2d_array_of_char(char **arr, int nb_rows);
 char *load_file_in_mem(char const *filepath);
 char **load_2d_arr_from_file(char const *filepath,
@@ -26,11 +35,19 @@ int is_a_number(char actual_char);
 int first_arg_is_a_number(char *first_arg);
 void map_generation(void);
 int map_verification(char *filepath);
+int check_number_of_lines(char *filepath);
 int check_first_line_map(char *buffer);
 int is_full_number_check(char *buffer);
+int check_map_content(char *filepath);
+int check_correct_number_of_line_map(char *filepath);
+int check_lines_length(char *filepath);
 
 int map_file_failed_opening(void);
 int map_file_empty(void);
 int map_file_first_line_error(void);
+int no_arguments_error(void);
+int map_forbidden_char(void);
+int map_incorrect_line_number(void);
+int map_incorrect_lines_length(void);
 
 #endif
