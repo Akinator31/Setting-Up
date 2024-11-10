@@ -30,7 +30,7 @@ square_size_t arr_2d_len(char **map);
 int check_square_condition(char **map, int row, int col);
 int is_square_of_size(char **map, int row, int col, int square_size);
 int find_biggest_square(char **map, int row, int col);
-void display_2d_array(char **map);
+void display_2d_array(char **map, int nb_rows, int nb_cols);
 int is_a_number(char actual_char);
 int first_arg_is_a_number(char *first_arg);
 void map_generation(void);
@@ -41,6 +41,9 @@ int is_full_number_check(char *buffer);
 int check_map_content(char *filepath);
 int check_correct_number_of_line_map(char *filepath);
 int check_lines_length(char *filepath);
+int get_first_line_length(char *buffer);
+int compute_map(char *filepath);
+void draw_square(char **map, int pos_x, int pos_y, int square_size);
 
 int map_file_failed_opening(void);
 int map_file_empty(void);

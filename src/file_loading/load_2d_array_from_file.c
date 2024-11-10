@@ -8,11 +8,21 @@
 #include <stdlib.h>
 #include "../../include/setting_up.h"
 
+int skip_to_first_line(char *buffer)
+{
+    int result = 0;
+
+    for (int i = 0; buffer[i] != '\n'; i++) {
+        result += 1;
+    }
+    return result;
+}
+
 char **load_2d_arr_from_file(char const *filepath, int nb_rows, int nb_cols)
 {
     char **buffer = (char **)malloc(sizeof(char *) * (nb_rows + 1));
-    int size = 0;
     char *file_buffer = load_file_in_mem(filepath);
+    int size = skip_to_first_line(file_buffer) + 1;
     int open_result = 0;
 
     for (int i = 0; i < nb_rows; i++)

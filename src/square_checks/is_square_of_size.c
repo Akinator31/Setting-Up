@@ -11,11 +11,10 @@ int check_square_condition(char **map, int row, int col)
 {
     square_size_t size = arr_2d_len(map);
 
-    if ((row > (size.row - 1)) || (col > size.col))
+    if ((row > (size.row - 1)) || (col > size.col - 1))
         return 0;
-    if (map[row][col] == 'o') {
+    if (map[row][col] == 'o')
         return 0;
-    }
     return 1;
 }
 

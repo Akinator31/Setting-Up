@@ -5,10 +5,11 @@
 ** map_generation
 */
 
+#include <unistd.h>
 #include "../../include/setting_up.h"
 
 void map_generation(void)
 {
-    printf("generate...\n");
+    write(1, "generate...\n", 13);
     return;
 }

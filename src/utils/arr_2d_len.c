@@ -7,19 +7,18 @@
 
 #include <stdlib.h>
 #include "../../include/setting_up.h"
+#include "../../include/my.h"
 
 square_size_t arr_2d_len(char **map)
 {
+    int col = my_strlen(map[0]) - 1;
     square_size_t size = {
         0,
-        0
+        col
     };
 
     for (int i = 0; map[i] != NULL; i++) {
         size.row += 1;
-    }
-    for (int i = 0; map[0][i] != '\n'; i++) {
-        size.col += 1;
     }
     return size;
 }

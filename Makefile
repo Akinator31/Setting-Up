@@ -10,6 +10,7 @@ SRC	=	setting_up.c \
 		src/file_loading/load_2d_array_from_file.c \
 		src/square_checks/is_square_of_size.c \
 		src/square_checks/find_biggest_square.c \
+		src/square_checks/draw_square.c \
 		src/args_verification/first_arg_check.c \
 		src/map_generation/map_generation.c \
 		src/map_verification/map_verification.c \

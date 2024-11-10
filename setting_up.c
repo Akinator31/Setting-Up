@@ -13,8 +13,11 @@ int file_test(char *filepath)
 {
     int fd = open(filepath, O_RDONLY);
 
-    if (fd == -1)
+    if (fd == -1) {
+        close(fd);
         return 84;
+    }
+    close(fd);
     return 0;
 }
 
@@ -28,5 +31,6 @@ int main(int ac, char **av)
             return map_file_failed_opening();
         if (map_verification(av[1]) == 84)
             return 84;
+        compute_map(av[1]);
     }
 }

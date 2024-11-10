@@ -10,7 +10,6 @@
 int first_arg_is_a_number(char *first_arg)
 {
     if (is_a_number(first_arg[0])) {
-        map_generation();
         return 1;
     }
     return 0;
