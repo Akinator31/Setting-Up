@@ -23,6 +23,7 @@ typedef struct error_report {
     int err_code;
 } error_report_t;
 
+int my_printf(const char *restrict format, ...);
 void free_2d_array_of_char(char **arr, int nb_rows);
 char *load_file_in_mem(char const *filepath);
 char **load_2d_arr_from_file(char const *filepath,

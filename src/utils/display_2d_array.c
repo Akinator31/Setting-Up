@@ -13,6 +13,6 @@ void display_2d_array(char **map, int nb_rows, int nb_cols)
     square_size_t size = arr_2d_len(map);
 
     for (int i = 0; i < nb_rows; i++) {
-            printf("%s", map[i]);
+            my_printf("%s", map[i]);
     }
 }

@@ -36,7 +36,8 @@ OBJ = $(SRC:.c=.o)
 
 NAME = setting_up
 
-LIBDIR = lib/libmy.a
+LIBDIR = 	lib/my_lib/libmy.a \
+			lib/my_printf/libmy_printf.a
 
 CLEANDIR = 	*.o \
 			src/file_loading/*.o \
@@ -50,11 +51,13 @@ CLEANDIR = 	*.o \
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		make -C lib
+		make -C lib/my_lib
+		make -C lib/my_printf
 		gcc -o $(NAME) $(OBJ) $(LIBDIR)
 
 clean:
-		make clean -C lib
+		make clean -C lib/my_lib
+		make clean -C lib/my_printf
 		rm -f $(CLEANDIR)
 
 fclean: clean
