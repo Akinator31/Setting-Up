@@ -22,18 +22,23 @@ int find_biggest_square(char **map, int row, int col)
     return square_size - 1;
 }
 
-int loop_condition(char **map, int **loop_params, square_size_t *size)
+int loop_condition(char **map, int **loop_params,
+    square_size_t *biggest_square, square_size_t size)
 {
-    int square_size = find_biggest_square(map,
-        *loop_params[2], *loop_params[3]);
+    int square_size = 0;
 
-    if (square_size > *loop_params[4]) {
-        *loop_params[4] = square_size;
-        size->row = *loop_params[2];
-        size->col = *loop_params[3];
+    if ((square_size > (size.col - *loop_params[1])) ||
+        (square_size > (size.row - *loop_params[0])))
+        return square_size;
+    square_size = find_biggest_square(map,
+        *loop_params[0], *loop_params[1]);
+    if (square_size > *loop_params[2]) {
+        *loop_params[2] = square_size;
+        biggest_square->row = *loop_params[0];
+        biggest_square->col = *loop_params[1];
         return square_size;
     }
-    return *loop_params[4];
+    return *loop_params[2];
 }
 
 int compute_map(char *filepath)
@@ -41,20 +46,20 @@ int compute_map(char *filepath)
     int i = 0;
     int e = 0;
     char *buffer = load_file_in_mem(filepath);
-    int nb_rows = my_getnbr(buffer);
-    int nb_cols = get_first_line_length(buffer);
-    char **map = load_2d_arr_from_file(filepath, nb_rows, nb_cols);
+    square_size_t size = {my_getnbr(buffer), get_first_line_length(buffer)};
+    char **map = load_2d_arr_from_file(filepath, size.row, size.col);
     int square_size = 1;
     square_size_t biggest_square = {0, 0};
-    int *loop_params[] = {&nb_rows, &nb_cols, &i, &e, &square_size};
+    int *loop_params[] = {&i, &e, &square_size};
 
-    for (i = 0; i < nb_rows; i++) {
-        for (e = 0; e < nb_cols; e++) {
-            square_size = loop_condition(map, loop_params, &biggest_square);
+    for (i = 0; i < size.row; i++) {
+        for (e = 0; e < size.col; e++) {
+            square_size = loop_condition(map, loop_params,
+                &biggest_square, size);
         }
     }
     draw_square(map, biggest_square.col, biggest_square.row, square_size);
-    display_2d_array(map, nb_rows, nb_cols);
+    display_2d_array(map, size.row, size.col);
     free(buffer);
-    free_2d_array_of_char(map, nb_rows);
+    free_2d_array_of_char(map, size.row);
 }

@@ -7,13 +7,9 @@
 
 #include "../../include/setting_up.h"
 
-int check_square_condition(char **map, int row, int col)
+int check_square_condition(char **map, int row, int col, square_size_t size)
 {
-    square_size_t size = arr_2d_len(map);
-
-    if ((row > (size.row - 1)) || (col > size.col - 1))
-        return 0;
-    if (map[row][col] == 'o')
+    if ((row >= size.row) || (col >= size.col) || map[row][col] == 'o')
         return 0;
     return 1;
 }
@@ -21,11 +17,17 @@ int check_square_condition(char **map, int row, int col)
 int is_square_of_size(char **map, int row, int col, int square_size)
 {
     int check_square = 1;
+    square_size_t size = arr_2d_len(map);
 
-    for (int i = 0; (i < square_size) && (check_square == 1); i++) {
-        for (int e = 0; (e < square_size) && (check_square == 1); e++) {
-            check_square = check_square_condition(map, row + i, col + e);
-        }
+    for (int i = 0; i < square_size; i++) {
+        if (!(check_square_condition(map, row + square_size - 1,
+            col + i, size)))
+            return 0;
     }
-    return check_square;
+    for (int i = 0; i < square_size; i++) {
+        if (!(check_square_condition(map, row + i,
+            col + square_size - 1, size)))
+            return 0;
+    }
+    return 1;
 }

@@ -11,6 +11,7 @@
 typedef struct square_size {
     int row;
     int col;
+    int square_size;
 } square_size_t;
 
 typedef struct errors_s {
@@ -27,7 +28,7 @@ char *load_file_in_mem(char const *filepath);
 char **load_2d_arr_from_file(char const *filepath,
     int nb_rows, int nb_cols);
 square_size_t arr_2d_len(char **map);
-int check_square_condition(char **map, int row, int col);
+int check_square_condition(char **map, int row, int col, square_size_t size);
 int is_square_of_size(char **map, int row, int col, int square_size);
 int find_biggest_square(char **map, int row, int col);
 void display_2d_array(char **map, int nb_rows, int nb_cols);
