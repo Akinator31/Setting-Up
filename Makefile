@@ -24,6 +24,8 @@ SRC	=	setting_up.c \
 		src/utils/display_2d_array.c \
 		src/utils/is_a_number.c \
 		src/utils/is_full_number_char.c \
+		src/utils/is_str_of_number.c \
+		src/utils/fill_str.c \
 		src/errors/map_file_failed_opening.c \
 		src/errors/map_file_empty.c \
 		src/errors/map_file_first_line_error.c \
@@ -31,6 +33,8 @@ SRC	=	setting_up.c \
 		src/errors/map_forbidden_char.c \
 		src/errors/map_incorrect_line_number.c \
 		src/errors/map_incorrect_lines_length.c \
+		src/errors/too_much_args_error.c \
+		src/errors/incorrect_args_for_map_gen.c \
 
 OBJ = $(SRC:.c=.o)
 

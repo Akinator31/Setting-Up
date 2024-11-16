@@ -45,7 +45,7 @@ int compute_map(char *filepath)
 {
     int i = 0;
     int e = 0;
-    char *buffer = load_file_in_mem(filepath);
+    char *buffer = load_file_in_mem(filepath, 1);
     square_size_t size = {my_getnbr(buffer), get_first_line_length(buffer)};
     char **map = load_2d_arr_from_file(filepath, size.row, size.col);
     int square_size = 1;
@@ -61,5 +61,28 @@ int compute_map(char *filepath)
     draw_square(map, biggest_square.col, biggest_square.row, square_size);
     display_2d_array(map, size.row, size.col);
     free(buffer);
+    free_2d_array_of_char(map, size.row);
+}
+
+int compute_map_gen(char *map_buffer)
+{
+    int i = 0;
+    int e = 0;
+    square_size_t size = {my_getnbr(map_buffer),
+        get_first_line_length(map_buffer)};
+    char **map = load_2d_arr_from_map(map_buffer, size.row, size.col);
+    int square_size = 1;
+    square_size_t biggest_square = {0, 0};
+    int *loop_params[] = {&i, &e, &square_size};
+
+    for (i = 0; i < size.row; i++) {
+        for (e = 0; e < size.col; e++) {
+            square_size = loop_condition(map, loop_params,
+                &biggest_square, size);
+        }
+    }
+    draw_square(map, biggest_square.col, biggest_square.row, square_size);
+    display_2d_array(map, size.row, size.col);
+    free(map_buffer);
     free_2d_array_of_char(map, size.row);
 }

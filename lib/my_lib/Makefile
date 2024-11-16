@@ -19,7 +19,6 @@ $(NAME): $(OBJ)
 
 clean:
 	rm -f *.o
-	rm -f libmy.a
 
 fclean: clean
 

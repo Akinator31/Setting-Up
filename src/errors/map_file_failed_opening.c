@@ -10,6 +10,6 @@
 
 int map_file_failed_opening(void)
 {
-    write(2, "Error openning file\n", 21);
+    write(2, "Error openning or reading file\n", 31);
     return 84;
 }

@@ -7,3 +7,5 @@ B-CPE-110_Setting_Up_Generator.pl
 coding-style-reports.log
 map_10k_5kpc
 map_30k_15kpc
+lib/my_lib/libmy.a
+lib/my_printf/libmy_printf.a

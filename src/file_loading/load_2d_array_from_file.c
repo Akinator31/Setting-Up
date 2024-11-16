@@ -18,10 +18,10 @@ int skip_to_first_line(char *buffer)
     return result;
 }
 
-char **load_2d_arr_from_file(char const *filepath, int nb_rows, int nb_cols)
+char **load_2d_arr_from_file(char *filepath, int nb_rows, int nb_cols)
 {
     char **buffer = (char **)malloc(sizeof(char *) * (nb_rows + 1));
-    char *file_buffer = load_file_in_mem(filepath);
+    char *file_buffer = load_file_in_mem(filepath, 1);
     int size = skip_to_first_line(file_buffer) + 1;
     int open_result = 0;
 
@@ -36,5 +36,24 @@ char **load_2d_arr_from_file(char const *filepath, int nb_rows, int nb_cols)
     }
     buffer[nb_rows] = NULL;
     free(file_buffer);
+    return buffer;
+}
+
+char **load_2d_arr_from_map(char *map, int nb_rows, int nb_cols)
+{
+    char **buffer = (char **)malloc(sizeof(char *) * (nb_rows + 1));
+    int size = skip_to_first_line(map) + 1;
+    int open_result = 0;
+
+    for (int i = 0; i < nb_rows; i++)
+        buffer[i] = (char *)malloc(sizeof(char) * (nb_cols + 2));
+    for (int i = 0; i <= nb_rows - 1; i++) {
+        for (int e = 0; e <= nb_cols; e++) {
+            buffer[i][e] = map[size];
+            size++;
+        }
+        buffer[i][nb_cols + 1] = '\0';
+    }
+    buffer[nb_rows] = NULL;
     return buffer;
 }
