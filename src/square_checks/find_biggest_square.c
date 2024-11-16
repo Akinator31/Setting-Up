@@ -22,11 +22,39 @@ int find_biggest_square(char **map, int row, int col)
     return square_size - 1;
 }
 
+static int one_line_case(char **map, square_size_t *biggest_square)
+{
+    for (int i = 0; map[0][i] != '\n'; i++) {
+        if (map[0][i] == '.') {
+            biggest_square->row = 0;
+            biggest_square->col = i;
+            return 1;
+        }
+    }
+    return 1;
+}
+
+static int one_collumn_case(char **map, square_size_t *biggest_square)
+{
+    for (int i = 0; i < arr_2d_len(map).row; i++) {
+        if (map[i][0] == '.') {
+            biggest_square->row = i;
+            biggest_square->col = 0;
+            return 1;
+        }
+    }
+    return 1;
+}
+
 int loop_condition(char **map, int **loop_params,
     square_size_t *biggest_square, square_size_t size)
 {
     int square_size = 0;
 
+    if (size.row == 1)
+        return one_line_case(map, biggest_square);
+    if (size.col == 1)
+        return one_collumn_case(map, biggest_square);
     if ((square_size > (size.col - *loop_params[1])) ||
         (square_size > (size.row - *loop_params[0])))
         return square_size;
@@ -62,6 +90,7 @@ int compute_map(char *filepath)
     display_2d_array(map, size.row, size.col);
     free(buffer);
     free_2d_array_of_char(map, size.row);
+    return 0;
 }
 
 int compute_map_gen(char *map_buffer)

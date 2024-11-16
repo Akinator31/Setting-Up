@@ -9,8 +9,8 @@
 
 void draw_square(char **map, int pos_x, int pos_y, int square_size)
 {
-    square_size_t size = arr_2d_len(map);
-
+    if (map[pos_y][pos_x] == 'o')
+        return;
     for (int i = 0; i < square_size; i++) {
         for (int a = 0; a < square_size; a++) {
             map[pos_y + i][pos_x + a] = 'x';

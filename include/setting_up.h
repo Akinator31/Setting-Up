@@ -11,7 +11,6 @@
 typedef struct square_size {
     int row;
     int col;
-    int square_size;
 } square_size_t;
 
 typedef struct errors_s {
